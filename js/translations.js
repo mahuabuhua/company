@@ -532,6 +532,10 @@ function initLanguage() {
     updateNavItems();
     updateLangButtons();
     updateFooter();
+    
+    if (typeof updatePageContent === 'function') {
+        updatePageContent(currentLang);
+    }
 }
 
 function switchLang(lang) {
@@ -588,4 +592,14 @@ function updateFooter() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', initLanguage);
+document.addEventListener('DOMContentLoaded', function() {
+    updateNavItems();
+    updateLangButtons();
+    updateFooter();
+});
+
+window.addEventListener('load', function() {
+    if (typeof updatePageContent === 'function') {
+        updatePageContent(currentLang);
+    }
+});
